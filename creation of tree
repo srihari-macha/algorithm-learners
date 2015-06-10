@@ -1,0 +1,92 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+  struct node *left;
+  int value;
+  struct node *right;
+}*root=NULL;
+
+void create()
+{
+  int data;
+  if(root==NULL)
+  {
+  root=(struct node *)malloc(sizeof(struct node));
+  printf("enter data to node:");
+  scanf("%d",&data);
+  root->left=NULL;
+  root->right=NULL;
+  root->value=data;
+  }
+  else
+  {
+   struct node *temp;
+   temp=(struct node *)malloc(sizeof(struct node));
+   printf("enter data to node:");
+   scanf("%d",&data);
+   temp->right=NULL;
+   temp->left=NULL;
+   temp->value=data;
+   arrange(root,temp);
+ }
+}
+
+void arrange(struct node *root, struct node *temp)
+{
+  if(root->value >= temp->value)
+  {
+   if(root->left==NULL)
+	root->left=temp;
+   else
+	arrange(root->left,temp);
+  }
+  else
+  {
+    if(root->right==NULL)
+	root->right=temp;
+    else
+	arrange(root->right, temp);
+  }
+}
+
+void preorder(struct node *root)
+{
+  if(root==NULL)
+	return;
+  printf("%d\t",root->value);
+  preorder(root->left);
+  preorder(root->right);
+}
+
+void close()
+{
+  printf("tree created:\n");
+  exit(0);
+}
+
+int main()
+{
+  int ch;
+  while(1)
+  {
+  printf("\n 1.create \n 2. display\n 3. exit\n");
+  printf("enter chice:");
+  scanf("%d",&ch);
+  
+  switch(ch)
+  {
+     case 1: create();
+		break;
+     case 2: preorder(root);
+		break;
+     case 3: close();
+		break;
+     default: printf("choose rit choice\n");
+  }
+}
+}
+  
+  
+	
+ 
